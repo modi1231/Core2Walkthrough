@@ -1,0 +1,33 @@
+﻿@page
+@model Core2Walkthrough.Pages.LeaderboardModel
+@{
+    ViewData["Title"] = "Leaderboard";
+}
+
+<h2>Leaderboard</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>XP</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @*Make use of a basic for loop to show rankings*@
+        @for (int i = 0; i < Model.UserList.Count - 1; i++)
+        {
+            <tr>
+                <td>@(i + 1)</td>
+                @*Link to the profiles with the right routing ids *@
+                <td><a asp-page="/Profile" asp-route-id="@Model.UserList[i].ID">@Model.UserList[i].Name</a></td>
+                <td>@Model.UserList[i].XP</td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

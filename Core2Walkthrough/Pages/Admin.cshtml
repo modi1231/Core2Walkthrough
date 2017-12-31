@@ -1,0 +1,156 @@
+﻿@page
+@model Core2Walkthrough.Pages.AdminModel
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+
+
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h2>Admin</h2>
+
+<h3><font color="lime"> @Model.Message</font></h3>
+
+@* Quick check to see which part of the code is being rendered.*@
+@if (HttpContextAccessor.HttpContext.Session.GetString("name") == null && HttpContextAccessor.HttpContext.Session.GetString("is_admin") == null)
+{
+    <h3>No Access</h3>
+}
+else
+{
+    <h3>News</h3>
+    <form method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    @*<th>id</th>*@
+                    <th>Name</th>
+                    <th>Date Added</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var temp in Model.NewsList)
+                {
+                    <tr>
+                        @*<td>@temp.ID </td>*@
+                        <td>@temp.TEXT</td>
+                        <td>@temp.DATE_ENTERED</td>
+                        <td>
+                            @*Important information here.. matching up the 'asp-page-handler' to the CS function, and the asp-rout- variable name and value.*@
+                            <button type="submit" asp-page-handler="DeleteNews" asp-route-id="@temp.ID">Delete</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+
+    <h4>Add News</h4>
+    <form method="post">
+        @*<div asp-validation-summary="All"></div>*@
+        <div>
+            <label asp-for="NewsAdd.TEXT"></label>
+            <input asp-for="NewsAdd.TEXT" />
+        </div>
+        <input asp-page-handler="NewsAdd" type="submit" value="Add News" />
+    </form>
+    <br /><br />
+
+    <h3>Users</h3>
+    <form method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    @*<th>id</th>*@
+                    <th>Name</th>
+                    <th>Date Entered</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var temp in Model.UserList)
+                {
+                    <tr>
+                        @*<td>@temp.ID </td>*@
+                        <td>@temp.Name</td>
+                        <td>@temp.DATE_ENTERED</td>
+                        <td>
+                            @if (HttpContextAccessor.HttpContext.Session.GetString("id") != temp.ID.ToString())
+                            {
+                                <button type="submit" asp-page-handler="DeleteUser" asp-route-id="@temp.ID">Delete</button>
+                            }
+                            else
+                            {
+                                @Html.Raw("&nbsp;");
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </form>
+
+    <br /><br />
+
+    <h3>Activities</h3>
+    <form method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    @*<th>ID </th>*@
+                    <th>Title</th>
+                    <th>XP</th>
+                    <th>COOL_OFF_MINUTES</th>
+                    <th>IS_ACTIVE</th>
+                    <th>DATE_ENTERED</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var temp in Model.ActivityList)
+                {
+                    <tr>
+                        @*<td>@temp.ID </td>*@
+                        <td>@temp.Title</td>
+                        <td>@temp.XP</td>
+                        <td>@temp.COOL_OFF_MINUTES</td>
+                        <td>@temp.IS_ACTIVE</td>
+                        <td>@temp.DATE_ENTERED</td>
+                        <td>
+                            <button type="submit" asp-page-handler="ActivityDisable" asp-route-id="@temp.ID">Enable/Disable</button>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </form>
+
+    <h4>Add Activity</h4>
+    <form method="post">
+        <div>
+            <label asp-for="ActivityAdd.Title"></label>
+            <input asp-for="ActivityAdd.Title" />
+
+            <label asp-for="ActivityAdd.Description"></label>
+            <input asp-for="ActivityAdd.Description" />
+
+            <label asp-for="ActivityAdd.XP"></label>
+            <input asp-for="ActivityAdd.XP" />
+
+            <label asp-for="ActivityAdd.COOL_OFF_MINUTES"></label>
+            <input asp-for="ActivityAdd.COOL_OFF_MINUTES" />
+
+            <label asp-for="ActivityAdd.IS_ACTIVE"></label>
+            <input asp-for="ActivityAdd.IS_ACTIVE" />
+        </div>
+        <input asp-page-handler="ActivityAdd" type="submit" value="Add Activity" />
+    </form>
+}
+

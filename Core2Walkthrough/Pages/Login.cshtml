@@ -1,0 +1,17 @@
+﻿@page
+@model Core2Walkthrough.Pages.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post">
+
+    <h3>@Model.Message</h3>
+
+
+    @*<div asp-validation-summary="All"></div>*@
+    <div>Name: <input asp-for="UserData.Name" value="test" /></div>
+    <input type="submit" />
+</form>

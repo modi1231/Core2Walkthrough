@@ -1,0 +1,23 @@
+﻿@page
+@model Core2Walkthrough.Pages.ProfileModel
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h2>Profile</h2>
+
+<h3>@Model.Message</h3>
+
+@if (Model.UserData == null)
+{
+    <p>No profile to load.</p>
+}
+else
+{
+    <p><label asp-for="@Model.UserData.ID"></label> : @Model.UserData.ID</p>
+    <p><label asp-for="@Model.UserData.Name"></label> : @Model.UserData.Name</p>
+    <p><label asp-for="@Model.UserData.XP"></label> : @Model.UserData.XP</p>
+    <p><label asp-for="@Model.UserData.DESCRIPTION"></label> : @Model.UserData.DESCRIPTION</p>
+
+
+}

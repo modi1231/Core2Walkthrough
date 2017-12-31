@@ -1,0 +1,32 @@
+﻿@page
+@model Core2Walkthrough.Pages.TestModel
+@{
+    ViewData["Title"] = "Test";
+}
+
+<h2>Testing bits of functionality</h2>
+<br />
+<h3><font color="lime"> @Model.Message</font></h3>
+<hr />
+<h3>Dropdown lists</h3>
+<form method="post">
+    @* templated helper *@
+    @* 1st param - the selected value to return on post, 2nd param the list from the model, 3rd parameter - some initial filler text *@
+    @Html.DropDownListFor(a => a.testDDSelected, Model.testDD, "--Select a Value--")
+    <button type="submit" asp-page-handler="DropDownList">Test</button>
+</form>
+
+<hr />
+<h3>RadioButton</h3>
+<form method="post">
+    @Html.RadioButtonFor(a => a.testRadioButtonSelected, "A")@Html.Label("A")
+    @Html.RadioButtonFor(a => a.testRadioButtonSelected, "B")@Html.Label("B")
+    <button type="submit" asp-page-handler="RadioButton">Test</button>
+</form>
+
+<hr />
+<h3>CheckBox</h3>
+<form method="post">
+    @Html.CheckBoxFor(a => a.isChecked)@Html.LabelFor(a => a.isChecked)
+    <button type="submit" asp-page-handler="CheckBox">Test</button>
+</form>

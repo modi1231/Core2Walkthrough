@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<h3>@Model.Message</h3>
+
+<h1>Welcome!</h1>
+<div>
+    This is just the landing page for anyone visiting the site.  It can be filled with static text, formatted with CSS, or show data pulled from a database.
+</div>
+<br />
+<div>
+    <h3>News</h3>
+    <div style="margin-left:20px;">
+        @foreach (var temp in Model.NewsList)
+        {
+            <h4>@temp.DATE_ENTERED.ToShortDateString()</h4>
+            <span style="margin-left:20px;">@temp.TEXT</span>
+            <br />
+        }
+    </div>
+
+</div>
+<hr />
+<a asp-page="Test">Test Page</a>

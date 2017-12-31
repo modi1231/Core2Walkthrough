@@ -1,0 +1,15 @@
+﻿@page
+@model Core2Walkthrough.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+<h3>@Model.Message</h3>
+
+<form method="post">
+    @*<div asp-validation-summary="All"></div>*@
+    <div><label asp-for="@Model.UserData.Name"></label>: <input asp-for="UserData.Name" /></div>
+    <div><label asp-for="@Model.UserData.DESCRIPTION"></label>: <input asp-for="UserData.DESCRIPTION" /></div>
+    <input type="submit" />
+</form>

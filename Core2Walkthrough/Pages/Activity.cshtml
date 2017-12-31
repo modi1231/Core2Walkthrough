@@ -1,0 +1,64 @@
+﻿@page
+@model Core2Walkthrough.Pages.ActivityModel
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Activity";
+}
+
+<h2>Activity</h2>
+<h3><font color="lime"> @Model.Message</font></h3>
+
+@* Quick check to see which part of the code is being rendered.*@
+@if (HttpContextAccessor.HttpContext.Session.GetString("name") == null)
+{
+    <h3>No Access</h3>
+}
+else
+{
+    <form method="post">
+        <table class="table">
+            <thead>
+                <tr>
+                    @*<th>ID </th>*@
+                    <th>Title</th>
+                    <th>XP</th>
+                    <th>COOL_OFF_MINUTES</th>
+                    <th>IS_ACTIVE</th>
+                    <th>DATE_ENTERED</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var temp in Model.ActivityList)
+                {
+                    <tr>
+                        @*<td>@temp.ID </td>*@
+                        <td>@temp.Title</td>
+                        <td>@temp.XP</td>
+                        <td>@temp.COOL_OFF_MINUTES</td>
+                        <td>@temp.IS_ACTIVE</td>
+                        <td>@temp.DATE_ENTERED</td>
+                        <td>
+                            @if (temp.TIME_LEFT == 0)
+                            {
+                                //Matches up with the OnPostActivityDoAsync in the cs page.
+                                <button type="submit" asp-page-handler="ActivityDo" asp-route-id="@temp.ID">Do</button>
+                            }
+                            else
+                            {
+                                //Utilizing some .NET ability here.
+                                TimeSpan t = TimeSpan.FromSeconds((double)temp.TIME_LEFT);
+
+                                <label>Left: mm: @Math.Floor(@t.TotalMinutes).ToString()   ss: @t.Seconds.ToString() </label>
+                            }
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </form>
+}
