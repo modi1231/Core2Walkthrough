@@ -24,7 +24,7 @@ namespace Core2Walkthrough.Pages
 {
     public class AdminModel : PageModel
     {
-        private readonly AppDbContext _db;
+        private readonly AppDbContext _db; // access route to and from the DB.
 
         [TempData]
         public string Message { get; set; }// no private set b/c we need data back
