@@ -25,12 +25,11 @@ namespace Core2Walkthrough.Pages
      * */
 
 
-   
+
     public class IndexModel : PageModel
     {
         private readonly AppDbContext _db;
 
-        public IList<USERS> UserDatas { get; private set; }// private set so don't need to have data back.. just to show.
         public IList<NEWS> NewsList { get; private set; }// private set so don't need to have data back.. just to show.
 
         [TempData]
@@ -43,14 +42,11 @@ namespace Core2Walkthrough.Pages
         {
             //Get the database context so we can move data to and from the tables.
             _db = db;
-
- 
         }
 
         //When the page is being fetched, load some data to be rendered.
         public async Task OnGetAsync()
         {
-            UserDatas = await _db.USER_DBSet.AsNoTracking().ToListAsync();
             NewsList = await _db.NEWS_DBSet.AsNoTracking().ToListAsync();
         }
 
@@ -62,7 +58,7 @@ namespace Core2Walkthrough.Pages
             return RedirectToPage();
         }
 
- 
+
 
     }
 }
