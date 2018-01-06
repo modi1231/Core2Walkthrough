@@ -19,4 +19,3 @@ C:\code\Core2Walkthrough\Core2Walkthrough\obj\Debug\netcoreapp2.0\Core2Walkthrou
 C:\code\Core2Walkthrough\Core2Walkthrough\obj\Debug\netcoreapp2.0\Core2Walkthrough.AssemblyInfo.cs
 C:\code\Core2Walkthrough\Core2Walkthrough\obj\Debug\netcoreapp2.0\Core2Walkthrough.dll
 C:\code\Core2Walkthrough\Core2Walkthrough\obj\Debug\netcoreapp2.0\Core2Walkthrough.pdb
-C:\code\Core2Walkthrough\Core2Walkthrough\obj\Debug\netcoreapp2.0\Core2Walkthrough.csprojResolveAssemblyReference.cache

@@ -51,12 +51,12 @@ namespace Core2Walkthrough.Pages
                 {
                     string q = @" SELECT 1 as MyResult
                                   FROM USERS with(nolock)
-                                  WHERE TOLOWER(Name) = @userName ";
+                                    WHERE Name = @userName ";
                     command.CommandText = q;
 
                     DbParameter tempParameter = command.CreateParameter();
                     tempParameter.ParameterName = "@userName";
-                    tempParameter.Value = UserData.Name.ToLower();
+                    tempParameter.Value = UserData.Name;
                     command.Parameters.Add(tempParameter);
 
                     temp = command.ExecuteScalar();
