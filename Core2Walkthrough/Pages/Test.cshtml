@@ -3,6 +3,54 @@
 @{
     ViewData["Title"] = "Test";
 }
+<script src="~/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    //$(document).ready(function () {
+    //    console.log("ready!");
+    //});
+
+    $(function () {
+        $('#testDDSelectedAJAX').change(function () {
+            //var end = this.value;
+            //var firstDropVal = $('#pick').val();
+            console.log("here!");
+            var here = $('#testDDSelectedAJAX option:selected').text();
+            console.log(here);
+
+            $.ajax({
+                type: 'GET',
+                url: '/Test?handler=List',
+                data: {
+                    derp: here
+                }, // null, // optional data
+                dataType: 'text',
+                headers:
+                {
+                    //required for Razor to verify not XSS
+                    "RequestVerificationToken": $('input:hidden[name="__RequestVerificationToken"]').val()
+                },
+                success: function (result) {
+                    // do something with result
+                    console.log(result);
+                    $("#coke").after().html('<lable>Success: ' + result + '</lable>');
+                },
+                error: function (req, status, error) {
+                    // do something with error
+                    console.log("error");
+                    console.log(req);
+                    console.log(status);
+                    console.log(error);
+
+                }
+
+            });
+        });
+
+
+    });
+</script>
+
 
 <h2>Testing bits of functionality</h2>
 <br />
@@ -30,3 +78,13 @@
     @Html.CheckBoxFor(a => a.isChecked)@Html.LabelFor(a => a.isChecked)
     <button type="submit" asp-page-handler="CheckBox">Test</button>
 </form>
+
+<hr />
+<h3>Dropdown list with AJAX call to function</h3>
+<div id="coke"></div>
+
+<form method="post">
+    @* templated helper *@
+    @* 1st param - the selected value to return on post, 2nd param the list from the model, 3rd parameter - some initial filler text *@
+    @Html.DropDownListFor(a => a.testDDSelectedAJAX, Model.testDDAJAX, "--Select a Value--", new { @id = "testDDSelectedAJAX" })
+ </form>

@@ -28,6 +28,12 @@ namespace Core2Walkthrough.Pages
         [BindProperty]
         public bool isChecked { get; set; }//Checkbox Testing.. gets the selected value on post
 
+
+        public IEnumerable<SelectListItem> testDDAJAX { get; set; }// DropDown Testing
+
+        [BindProperty]
+        public string testDDSelectedAJAX { get; set; }//DropDown Testing.. gets the selected value on post
+
         public TestModel(AppDbContext db)
         {
             //DropDown Testing - fill values for hte list.
@@ -44,6 +50,18 @@ namespace Core2Walkthrough.Pages
                          Value = a
                      };
 
+            foo = new List<string>();
+            foo.Add("a1");
+            foo.Add("b1");
+            foo.Add("c1");
+
+            //convert that to a 'select list item'.
+            testDDAJAX = from a in foo
+                     select new SelectListItem
+                     {
+                         Text = a,
+                         Value = a
+                     };
         }
 
         //DropDown Testing - display selected item to show it was picked.
@@ -66,5 +84,13 @@ namespace Core2Walkthrough.Pages
             Message = "Checkbox: " + isChecked.ToString();
             return RedirectToPage();
         }
+
+
+        //Selected change event triggers ajax call to get data from the post and return it modfified.
+        public ContentResult OnGetList(string derp)
+        {
+            return Content("nuts -- " + derp);
+        }
+
     }
 }
