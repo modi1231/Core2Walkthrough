@@ -12,5 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Database_Creates\" />
+    <Folder Include="wwwroot\temp\" />
   </ItemGroup>
 </Project>

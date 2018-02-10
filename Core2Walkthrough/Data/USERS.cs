@@ -24,6 +24,6 @@ namespace Core2Walkthrough.Data
 
         [Display(Name = "Description")]
         public string DESCRIPTION { get; set; }
-
+         
     }
 }

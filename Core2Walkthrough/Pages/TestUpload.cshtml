@@ -1,0 +1,17 @@
+﻿@page
+@model Core2Walkthrough.Pages.TestUploadModel
+@{
+    ViewData["Title"] = "TestUpload";
+}
+
+<h2>Testing the uploading of files.</h2>
+
+<h3><font color="lime"> @Model.Message</font></h3>
+
+@*basic form to post4.  Input name *MUST* match the post's variable name.*@
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <input type="submit" value="Upload" />
+</form>
+
+<a asp-page="Index">Index</a>
